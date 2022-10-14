@@ -1,0 +1,25 @@
+->  3 steps of a spec
+    Setup,
+    Operation,
+    Assertion
+
+->  It is always recommended to mock the dependencies of a service being tested
+    Reason: 
+    To make the Service isolate else it is not considered as a unit test
+
+-> spies can be used for mocking the classes, services etc
+
+-> tests are independent of each other
+
+-> uses DI pattern
+
+-> jasmine - test framework 
+
+-> karma - test runner 
+
+-> f - focus, x - exit 
+
+-> fdescribe  - executes only this block
+-> xdescribe - will not consider while executing 
+-> fit - executes only spec
+-> xit - will not consider this spec while executing

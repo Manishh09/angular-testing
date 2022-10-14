@@ -1,11 +1,21 @@
+import { TestBed } from "@angular/core/testing";
 import { CalculatorService } from "./calculator.service";
+import { LoggerService } from "./logger.service";
 
 describe('CalculatorService',() => { // contains the group of specs
-  let loggerServ: any,
+  let loggerServSpy: any,
       calcServ: CalculatorService;
   beforeEach(() => {
-    loggerServ = jasmine.createSpyObj('LoggerService', ['log']);
-    calcServ =  new CalculatorService(loggerServ);
+    loggerServSpy = jasmine.createSpyObj('LoggerService', ['log']);
+    TestBed.configureTestingModule({
+      providers: [
+          {
+            provide: LoggerService, useValue: loggerServSpy
+          }
+        
+      ]
+    });
+    calcServ =  TestBed.inject(CalculatorService);
   })
 
   it('should add two numbers', ()=>{
@@ -17,7 +27,7 @@ describe('CalculatorService',() => { // contains the group of specs
     //const calcServ = new CalculatorService(loggerServ);
     const result = calcServ.add(2,4);
     expect(result).toBe(6);
-    expect(loggerServ.log).toHaveBeenCalledTimes(2); // check if the method 'log' is called how many times
+    expect(loggerServSpy.log).toHaveBeenCalledTimes(2); // check if the method 'log' is called how many times
   })
 
   it('should substract two numbers', ()=>{
@@ -25,8 +35,8 @@ describe('CalculatorService',() => { // contains the group of specs
     //const calcServ = new CalculatorService(loggerServ);
     const result = calcServ.subtract(2,3);
     expect(result).toBe(-1, 'unexpected subtraction'); // can also provide the error description why the error has occured
-    expect(loggerServ.log).toHaveBeenCalledTimes(2);
+    expect(loggerServSpy.log).toHaveBeenCalledTimes(2);
   })
-
+  
 
 })
